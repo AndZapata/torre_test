@@ -16,7 +16,7 @@ class App extends React.Component {
       username: '',
       features: [],
       techSkills: [],
-      techCompany: ''
+      techCompany: []
     };
   }
 
@@ -30,21 +30,34 @@ class App extends React.Component {
   searchPeople = async e => {
     const {
       username,
-      features,
-      techSkills,
       techCompany
     } = this.state;
     const userDisplay = {
       username,
-      features,
-      techSkills,
       techCompany
     };
-    await axios.post(`http://localhost:5000/company`, userDisplay)
+    await axios.post(`http://localhost:5000/comparison`, userDisplay)
       .then(
         console.log(e)
       )
   };
+
+  displayCompanies = async (e) => {
+    axios.get(`http://localhost:5000/stack`)
+    .then(async res => {
+      res.data.forEach(async item => {
+        await this.setState({
+          techCompany: [...this.state.techCompany, item]
+        })
+      })
+    })
+    .catch(async err => {
+      console.log(err);
+    })
+  }
+  handleCompanies = async e => {
+    console.log(e)
+  }
 
   render() {
     return (
@@ -53,7 +66,7 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <>
-              <Route path='/' render={props => <Home {...props} username={this.state.username} features={this.state.features} techSkills={this.state.techSkills} techCompany={this.state.techCompany} onHandleInput={this.handleInputChange} searchPeople={this.searchPeople} />} />
+              <Route path='/' render={props => <Home {...props} username={this.state.username} features={this.state.features} techSkills={this.state.techSkills} techCompany={this.state.techCompany} onHandleInput={this.handleInputChange} searchPeople={this.searchPeople} onHandleCompanies={this.handleCompanies} onDisplayCompanies={this.displayCompanies} />} />
             </>
           </Switch>
           <Footer />
