@@ -1,0 +1,106 @@
+body {
+  font-family: "Istok Web", sans-serif;
+}
+
+.card-title {
+  font-family: "Convergence", sans-serif;
+}
+
+.btn-outline-danger {
+  border-color: #f44336;
+}
+
+.btn-outline-danger:hover {
+  background-color: #f44336;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  border-color: #f44336;
+}
+
+.btn-danger:hover {
+  background-color: #f44336;
+  border-color: #f44336;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 50px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after {
+  content: ">";
+  font-size: 40px;
+  color: #f44336;
+}
+
+.carousel-control-prev-icon:after {
+  content: "<";
+  font-size: 40px;
+  color: #f44336;
+}
+
+.carousel-indicators li {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  background-color: #f44336;
+}
+
+.page-footer {
+  display: flex;
+}
+
+.loginBox {
+  display: flex;
+  justify-content: center;
+}
+
+.card-img-top {
+  width: 19vw;
+}
+
+.image-cropper {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: auto;
+}
+.profile-pic {
+  margin: auto;
+  margin-left: auto;
+  height: auto;
+  width: 100%;
+}
+
+.formato {
+  padding: 0% 10% 0% 10%;
+}
+
+.option1, .option2, .option3, .option4 {
+  width: 15%;
+  height: 15%;
+}
+
+@media only screen and (max-width: 800px) {
+  .carousel-indicators li {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .card-img-top {
+    width: 50vw;
+  }
+
+  .image-cropper {
+    width: 130px;
+    height: 130px;
+  }
+}
