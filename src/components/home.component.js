@@ -21,7 +21,7 @@ export class Home extends Component {
                 {this.props.techCompany.map(item => (
                   <li key={item._id} className="list-group-item d-flex justify-content-between align-items-center">
                   {item.techCompany}
-                  <input className="form-check-input" type="checkbox" onClick={this.props.onHandleCompanies} name={item.company} defaultValue={item._id} />
+                  <input className="form-check-input" type="checkbox" onClick={this.props.onHandleInput} name="techCompanyId" defaultValue={item._id} />
                 </li>
                 ))}
               </ul>
