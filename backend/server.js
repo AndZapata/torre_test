@@ -13,6 +13,10 @@ app.use(cors());
 app.use(express.json());
 
 // route to handle stack for rankings
+const userData = require('./routes/data');
+app.use('/data', userData);
+
+// route to handle stack for rankings
 const stackData = require('./routes/stack');
 app.use('/stack', stackData);
 
