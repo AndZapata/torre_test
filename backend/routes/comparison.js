@@ -4,8 +4,7 @@ const axios = require('axios');
 
 // empty array to fill when the company id is obtained
 let techSkills = [];
-let username = [];
-let features = [];
+let tempStrengths = [];
 let count = 0;
 
 // function to handle the client requests choosing
@@ -36,19 +35,22 @@ handleData = async e => {
   await axios
     .get(`https://bio.torre.co/api/people?q=${e}`)
     .then(response => {
-      response.data.forEach(people => {
-        username.push(people.publicId);
-      });
-      username.forEach(async publicId => {
-        await axios
-          .get(`https://bio.torre.co/api/bios/${publicId}`)
+      response.data.forEach(async items => {
+        await axios.get(`https://bio.torre.co/api/bios/${items.publicId}`)
           .then(async response => {
             await response.data.strengths.forEach(async item => {
-              await features.push(item.name);
-            });
+              tempStrengths.push(item.name)
+            })
+            await axios.post(`http://localhost:5000/data`, {
+              username: response.data.person.publicId,
+              name: response.data.person.name,
+              strengths: tempStrengths
+            })
+            .then(response => {
+              console.log(response.data)
+            })
           })
-          .catch(err => console.log(err));
-      });
+      })
     })
     .catch(err => console.log(err));
 };
@@ -58,17 +60,17 @@ router.post('/', async (req, res) => {
   try {
     const companies = await handleCompanies(req.body._id);
     const userdata = await handleData(req.body.username);
-    // taking only unique items in the array of features
-    console.log(features)
+    /* // taking only unique items in the array of features
     let unique = [...new Set(features)];
-
     unique.forEach(item => {
       if (item in techSkills) {
         count += 1;
+
+        console.log(count)
       }
     });
-    console.log(unique)
-    res.json(unique);
+    console.log(unique) */
+    res.json('ok');
   } catch (err) {
     res.json({ message: err });
   }
