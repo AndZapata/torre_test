@@ -16,7 +16,8 @@ class App extends React.Component {
       username: '',
       features: [],
       techSkills: [],
-      techCompany: []
+      techCompany: [],
+      techCompanyId: ''
     };
   }
 
@@ -30,19 +31,25 @@ class App extends React.Component {
   searchPeople = async e => {
     const {
       username,
-      techCompany
+      techCompanyId,
+      features
     } = this.state;
     const userDisplay = {
       username,
-      techCompany
+      techCompanyId,
+      features
     };
     await axios.post(`http://localhost:5000/comparison`, userDisplay)
-      .then(
-        console.log(e)
+      .then(async res => {
+        await this.setState({
+          features: res.data
+        })
+        console.log(this.state.features)
+      }
       )
   };
 
-  displayCompanies = async (e) => {
+  displayCompanies = async () => {
     axios.get(`http://localhost:5000/stack`)
     .then(async res => {
       res.data.forEach(async item => {
@@ -55,9 +62,6 @@ class App extends React.Component {
       console.log(err);
     })
   }
-  handleCompanies = async e => {
-    console.log(e)
-  }
 
   render() {
     return (
@@ -66,7 +70,7 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <>
-              <Route path='/' render={props => <Home {...props} username={this.state.username} features={this.state.features} techSkills={this.state.techSkills} techCompany={this.state.techCompany} onHandleInput={this.handleInputChange} searchPeople={this.searchPeople} onHandleCompanies={this.handleCompanies} onDisplayCompanies={this.displayCompanies} />} />
+              <Route path='/' render={props => <Home {...props} username={this.state.username} features={this.state.features} techSkills={this.state.techSkills} techCompany={this.state.techCompany} techCompanyId={this.state.techCompanyId} onHandleInput={this.handleInputChange} searchPeople={this.searchPeople} onDisplayCompanies={this.displayCompanies} />} />
             </>
           </Switch>
           <Footer />
