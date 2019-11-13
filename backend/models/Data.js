@@ -18,8 +18,13 @@ const dataSchema = mongoose.Schema({
     require: true
   },
   strengths: [{
-    type: String
-  }]
+    type: String,
+    require: true
+  }],
+  picture: {
+    type: String,
+    default: 'https://i.pinimg.com/originals/78/54/84/7854843699c1893928012a442386a129.jpg'
+  }
 });
 
 module.exports = mongoose.model('Data', dataSchema)
