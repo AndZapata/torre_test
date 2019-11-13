@@ -14,10 +14,10 @@ class App extends React.Component {
     this.state = {
       // single state of true
       username: '',
-      strengths: [],
       techSkills: [],
       techCompany: [],
-      techCompanyId: ''
+      techCompanyId: '',
+      usersObject: []
     };
   }
 
@@ -26,7 +26,6 @@ class App extends React.Component {
     await this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state.techCompanyId)
   };
 
   searchPeople = async e => {
@@ -49,42 +48,45 @@ class App extends React.Component {
         response.data.bussinessTools.forEach(async item => {
           await this.setState({ techSkills: [...this.state.techSkills, item] });
         });
-        console.log(this.state.techSkills)
       })
       .catch(err => console.log(err));
     await axios.post('http://localhost:5000/comparison', {
       username
-    }).then(async res => {
-      await res.data.forEach(async user => {
-        await axios.post(`http://localhost:5000/comparison/${user.publicId}`, {
-          userId: user.publicId
-        })
-          .then(async res => {
-            let newA = []
-            for (let i of res.data) {
-              for (let j of this.state.techSkills) {
-                if (i === j) {
-                  newA.push(i)
+    })
+      .then(async res => {
+        await res.data.forEach(async user => {
+          await axios.post(`http://localhost:5000/comparison/${user.publicId}`, {
+            userId: user.publicId
+          })
+            .then(async res => {
+              let newA = []
+              for (let i of res.data) {
+                for (let j of this.state.techSkills) {
+                  if (i === j) {
+                    newA.push(i)
+                  }
                 }
               }
-            }
-            let unique = [...new Set(newA)]
-            console.log(unique)
-            await axios.post(`http://localhost:5000/data`, {
-              username: user.publicId,
-              name: user.name,
-              strengths: unique,
-              picture: user.picture
+              let unique = [...new Set(newA)]
+              if (unique.length > 0) {
+                await axios.post(`http://localhost:5000/data`, {
+                  username: user.publicId,
+                  name: user.name,
+                  strengths: unique,
+                  picture: user.picture
+                })
+                  .then(async res => {
+                    await this.setState({
+                      usersObject: [...this.state.usersObject, res.data]
+                    })
+                  })
+                  .catch(err => console.log(err));
+              }
             })
-              .then(res => {
-                console.log(res)
-              })
-              .catch(err => console.log(err));
-          })
-          .catch(err => console.log(err));
+            .catch(err => console.log(err));
+        })
       })
-    }
-    )
+      .catch(err => console.log(err))
   };
 
   displayCompanies = async () => {
@@ -96,9 +98,7 @@ class App extends React.Component {
           })
         })
       })
-      .catch(async err => {
-        console.log(err);
-      })
+      .catch(async err => { console.log(err); })
   }
 
   render() {
@@ -108,7 +108,16 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <>
-              <Route path='/' render={props => <Home {...props} username={this.state.username} features={this.state.features} techSkills={this.state.techSkills} techCompany={this.state.techCompany} techCompanyId={this.state.techCompanyId} onHandleInput={this.handleInputChange} searchPeople={this.searchPeople} onDisplayCompanies={this.displayCompanies} />} />
+              <Route path='/' render={props => <Home {...props}
+              username={this.state.username}
+              techSkills={this.state.techSkills}
+              techCompany={this.state.techCompany}
+              techCompanyId={this.state.techCompanyId}
+              onHandleInput={this.handleInputChange}
+              searchPeople={this.searchPeople}
+              onDisplayCompanies={this.displayCompanies}
+              usersObject={this.state.usersObject}
+              />} />
             </>
           </Switch>
           <Footer />
