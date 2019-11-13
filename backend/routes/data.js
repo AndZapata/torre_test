@@ -16,7 +16,7 @@ router.get('/:dataId', async (req, res) => {
   // Get company by stack id
   try {
     const data = await Data.findById(req.params.dataId);
-    res.json(data);
+    await res.json(data);
   } catch (err) {
     res.json({ message: err });
   }
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
   try {
     const data = new Data(req.body);
     const savedData = await data.save();
-    res.json(savedData);
+    await res.json(savedData);
   } catch (err) {
     res.json({ message: err });
   }
