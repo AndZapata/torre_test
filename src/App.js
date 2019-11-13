@@ -21,6 +21,14 @@ class App extends React.Component {
     };
   }
 
+  //reset states
+  setDefault = async () => {
+      await this.setState({
+        usersObject: [],
+        username: '',
+        techCompanyId: ''
+      });
+  }
   // Handle diferent states filling the product description
   handleInputChange = async e => {
     await this.setState({
@@ -109,14 +117,15 @@ class App extends React.Component {
           <Switch>
             <>
               <Route path='/' render={props => <Home {...props}
-              username={this.state.username}
-              techSkills={this.state.techSkills}
-              techCompany={this.state.techCompany}
-              techCompanyId={this.state.techCompanyId}
-              onHandleInput={this.handleInputChange}
-              searchPeople={this.searchPeople}
-              onDisplayCompanies={this.displayCompanies}
-              usersObject={this.state.usersObject}
+                username={this.state.username}
+                techSkills={this.state.techSkills}
+                techCompany={this.state.techCompany}
+                techCompanyId={this.state.techCompanyId}
+                onHandleInput={this.handleInputChange}
+                searchPeople={this.searchPeople}
+                onDisplayCompanies={this.displayCompanies}
+                usersObject={this.state.usersObject}
+                onNewSearch={this.setDefault}
               />} />
             </>
           </Switch>
