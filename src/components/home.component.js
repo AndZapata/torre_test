@@ -10,7 +10,7 @@ export class Home extends Component {
             <div className="input-group-prepend">
               <span className="input-group-text" style={{ backgroundColor: "#20B6C9", color: "#ffffff" }} id="inputGroup-sizing-default">Name</span>
             </div>
-            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="username" onChange={this.props.onHandleInput} defaultValue={this.props.username} />
+            <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="username" onChange={this.props.onHandleInput} value={this.props.username} />
           </div>
           <div className="btn-group col-4">
             <button type="button" className="btn btn-light dropdown-toggle" style={{ backgroundColor: "#20B6C9", color: "#ffffff" }} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onClick={this.props.onDisplayCompanies}>
