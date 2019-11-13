@@ -5,8 +5,8 @@ export class Home extends Component {
     return (
       <div className="container text-center mt-4">
         <h1>Looking for Top people</h1>
-        <div className="d-flex justify-content-center mt-4">
-          <div className="input-group input-group-lg col-5">
+        <div className="row d-flex justify-content-center mt-4">
+          <div className="input-group input-group-lg col-3 p-0">
             <div className="input-group-prepend">
               <span className="input-group-text"
                 style={{ backgroundColor: "#20B6C9", color: "#ffffff" }}
@@ -19,7 +19,7 @@ export class Home extends Component {
               name="username" onChange={this.props.onHandleInput}
               value={this.props.username} />
           </div>
-          <div className="btn-group col-4">
+          <div className="btn-group col-2 p-0">
             <button type="button"
               className="btn btn-light dropdown-toggle"
               style={{ backgroundColor: "#20B6C9", color: "#ffffff" }}
@@ -29,45 +29,52 @@ export class Home extends Component {
               onClick={this.props.onDisplayCompanies}>
               Companies
  </button>
-            <div className="dropdown-menu col-11" style={{ height: "40vh", overflowY: "scroll" }}>
+            <div className="dropdown-menu col-11"
+              style={{ height: "40vh", overflowY: "scroll" }}>
               <ul className="list-group">
                 {this.props.techCompany.map(item => (
                   <li key={item._id}
-                    className="list-group-item d-flex justify-content-between align-items-center">
+                    className="list-group-item d-flex justify-content-between align-items-center pl-5">
                     {item.techCompany}
                     <input className="form-check-input"
                       type="checkbox"
-                      onClick={this.props.onHandleInput}
                       name="techCompanyId"
-                      value={item._id} />
+                      value={item._id}
+                      onClick={this.props.onHandleInput} />
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          <div className="btn btn-light col-3"
+          <button className="btn btn-light col-2"
             style={{ backgroundColor: "#20B6C9", color: "#ffffff" }}
-            onClick={this.props.searchPeople}> Search </div>
+            onClick={this.props.searchPeople}> Search </button>
+          <button className="btn btn-light col-2"
+            style={{ backgroundColor: "#3C7A89", color: "#ffffff" }}
+            onClick={this.props.onNewSearch}> New Search </button>
         </div>
         <div className="container mt-3">
-          <h1>Results</h1>
           <div className="row mx-auto">
             {this.props.usersObject.map(item => (
               <div className="col-lg-4 col-sm-6 mb-3" key={item._id}>
                 <div className="card mx-auto shadow p-3 mb-5 bg-white rounded border-light"
-                style={{ maxWidth: "18rem" }}>
+                  style={{ maxWidth: "18rem" }}>
                   <img
                     src={item.picture}
                     className="card-img-top d-block img-fluid rounded mx-auto w-50 mt-3"
                     alt="Profile pic"
                   />
                   <div className="card-body">
-                    <h5 className="card-title" >{item.name}</h5>
+                    <h4 className="card-title" >{item.name}</h4>
+                    <ul className="list-group">
                       {item.strengths.map(strength => (
-                        <p className="card-text" key={strength}>
+                        <li className="card-text list-group-item"
+                          style={{ backgroundColor: "#E5F6F8" }}
+                          key={strength}>
                           {strength}
-                        </p>
+                        </li>
                       ))}
+                    </ul>
                   </div>
                 </div>
               </div>
