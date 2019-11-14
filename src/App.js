@@ -42,7 +42,7 @@ class App extends React.Component {
       techCompanyId
     } = this.state;
     await axios
-      .get(`http://localhost:5000/stack/${techCompanyId}`)
+      .get(`http://34.67.77.109:5000/stack/${techCompanyId}`)
       .then(response => {
         response.data.applicationData.forEach(async item => {
           await this.setState({ techSkills: [...this.state.techSkills, item] });
@@ -58,12 +58,12 @@ class App extends React.Component {
         });
       })
       .catch(err => console.log(err));
-    await axios.post('http://localhost:5000/comparison', {
+    await axios.post('http://34.67.77.109:5000/comparison', {
       username
     })
       .then(async res => {
         await res.data.forEach(async user => {
-          await axios.post(`http://localhost:5000/comparison/${user.publicId}`, {
+          await axios.post(`http://34.67.77.109:5000/comparison/${user.publicId}`, {
             userId: user.publicId
           })
             .then(async res => {
@@ -77,7 +77,7 @@ class App extends React.Component {
               }
               let unique = [...new Set(newA)]
               if (unique.length > 0) {
-                await axios.post(`http://localhost:5000/data`, {
+                await axios.post(`http://34.67.77.109:5000/data`, {
                   username: user.publicId,
                   name: user.name,
                   strengths: unique,
@@ -98,7 +98,7 @@ class App extends React.Component {
   };
 
   displayCompanies = async () => {
-    axios.get(`http://localhost:5000/stack`)
+    axios.get(`http://34.67.77.109:5000/stack`)
       .then(async res => {
         res.data.forEach(async item => {
           await this.setState({
