@@ -56,9 +56,9 @@ export class Home extends Component {
         <div className="container mt-3">
           <div className="row mx-auto">
             {this.props.usersObject.map(item => (
-              <div className="col-lg-4 col-sm-6 mb-3" key={item._id}>
+              <div className="row-flex col-lg-4 col-sm-6 mb-3" key={item._id}>
                 <div className="card mx-auto shadow p-3 mb-5 bg-white rounded border-light"
-                  style={{ maxWidth: "18rem" }}>
+                  style={{ maxWidth: "18rem", minHeight: "10rem" }}>
                   <img
                     src={item.picture}
                     className="card-img-top d-block img-fluid rounded mx-auto w-50 mt-3"
