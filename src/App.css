@@ -6,59 +6,8 @@ body {
   font-family: "Convergence", sans-serif;
 }
 
-.btn-outline-danger {
-  border-color: #f44336;
-}
-
-.btn-outline-danger:hover {
-  background-color: #f44336;
-}
-
-.btn-danger {
-  background-color: #f44336;
-  border-color: #f44336;
-}
-
-.btn-danger:hover {
-  background-color: #f44336;
-  border-color: #f44336;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  height: 50px;
-  width: 100px;
-  outline: black;
-  background-size: 100%, 100%;
-  background-image: none;
-}
-
-.carousel-control-next-icon:after {
-  content: ">";
-  font-size: 40px;
-  color: #f44336;
-}
-
-.carousel-control-prev-icon:after {
-  content: "<";
-  font-size: 40px;
-  color: #f44336;
-}
-
-.carousel-indicators li {
-  border-radius: 50%;
-  width: 1rem;
-  height: 1rem;
-  background-color: #f44336;
-}
-
 .page-footer {
   display: flex;
-}
-
-.loginBox {
-  display: flex;
-  justify-content: center;
 }
 
 .card-img-top {
@@ -89,18 +38,7 @@ body {
   height: 15%;
 }
 
-@media only screen and (max-width: 800px) {
-  .carousel-indicators li {
-    width: 0.5rem;
-    height: 0.5rem;
-  }
-
-  .card-img-top {
-    width: 50vw;
-  }
-
-  .image-cropper {
-    width: 130px;
-    height: 130px;
-  }
+.row-flex {
+  display: flex;
+  flex-wrap: wrap;
 }
