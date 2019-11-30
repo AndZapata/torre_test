@@ -36,3 +36,5 @@ If you want to see the background working, as a developer:
 - Install the packages (this command will install the dependencies on the package file): `npm i`
 - Run the background: `nodemon /background/server.js` or `node /background/server.js`
 - Run the frontend: `npm start`
+
+------
